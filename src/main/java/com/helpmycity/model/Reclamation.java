@@ -7,7 +7,7 @@ import java.util.Date;
 public class Reclamation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String category;
@@ -21,6 +21,15 @@ public class Reclamation {
     private Date modification_date;
     private boolean isEnabled;
     private boolean isDeleted;
+
+    @PrePersist
+    private void initCreatedDate(){
+        if (created_date == null)
+            created_date = new Date();
+
+        if (modification_date == null)
+            modification_date = new Date();
+    }
 
     public Integer getId() {
         return id;

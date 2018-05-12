@@ -6,6 +6,8 @@ import com.helpmycity.model.Reclamation;
 import com.helpmycity.model.ReclamationRepository;
 import com.helpmycity.util.FileTools;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,7 +66,14 @@ public class ReclamationController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Iterable<Reclamation> getAllUsers() {
+    Page<Reclamation> getAllReclamation(Pageable pageable) {
+        // This returns a JSON or XML with the users
+        return reclamationRepository.findAll(pageable);
+    }
+
+    @GetMapping()
+    public @ResponseBody
+    Iterable<Reclamation> getAllUsers(@RequestParam String description) {
         // This returns a JSON or XML with the users
         return reclamationRepository.findAll();
     }
