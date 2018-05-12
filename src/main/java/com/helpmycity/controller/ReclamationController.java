@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Timestamp;
 import java.util.UUID;
 
 import static com.helpmycity.Config.UPLOADED_FOLDER;
@@ -71,10 +70,10 @@ public class ReclamationController {
         return reclamationRepository.findAll(pageable);
     }
 
-    @GetMapping()
+    @GetMapping("/{id}/**")
     public @ResponseBody
-    Iterable<Reclamation> getAllUsers(@RequestParam String description) {
+    Reclamation getReclamation(@PathVariable("id") Long id) {
         // This returns a JSON or XML with the users
-        return reclamationRepository.findAll();
+        return reclamationRepository.findOne(id);
     }
 }
