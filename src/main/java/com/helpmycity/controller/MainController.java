@@ -26,7 +26,7 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/photo/{filename:.+}")
+    @GetMapping("/img/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 
