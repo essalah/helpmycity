@@ -3,7 +3,7 @@ package com.helpmycity.controller;
 import com.helpmycity.Status;
 import com.helpmycity.StatusCode;
 import com.helpmycity.model.Reclamation;
-import com.helpmycity.model.ReclamationRepository;
+import com.helpmycity.repository.ReclamationRepository;
 import com.helpmycity.util.FileTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

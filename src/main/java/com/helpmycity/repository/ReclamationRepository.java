@@ -1,5 +1,6 @@
-package com.helpmycity.model;
+package com.helpmycity.repository;
 
+import com.helpmycity.model.Reclamation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 

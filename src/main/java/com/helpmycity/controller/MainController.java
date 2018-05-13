@@ -20,11 +20,6 @@ public class MainController {
         this.storageService = storageService;
     }
 
-    @GetMapping(path="/")
-    public String home() {
-        // This returns a JSON or XML with the users
-        return "index";
-    }
 
     @GetMapping("/img/{filename:.+}")
     @ResponseBody
