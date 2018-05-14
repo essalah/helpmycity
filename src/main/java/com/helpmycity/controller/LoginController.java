@@ -22,10 +22,11 @@ public class LoginController {
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.POST)
     public Object login(@RequestParam String email, @RequestParam String password) {
         User user = userService.findUserByEmail(email);
-        if (user.getPassword().equals(Crypt.getSecurePassword(password)))
-            return user;
-        else if (user == null)
+        if (user == null)
             return new Status(StatusCode.FAILED, "Email and password incorrect");
+        else if (user.getPassword().equals(Crypt.getSecurePassword(password)))
+            return user;
+
         else
             return new Status(StatusCode.FAILED, "Password incorrect");
     }
