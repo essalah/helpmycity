@@ -1,4 +1,6 @@
-package com.helpmycity.auth.model;
+package com.helpmycity.model;
+
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
@@ -8,14 +10,12 @@ public class Role {
     @Id
     @Column(name="role_id")
     private int id;
-    @Column(name="role")
-    private String role;
 
-    @PrePersist
-    private void defaultValues(){
-        id = 2;
-        role = "User";
-    }
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 60)
+    private RoleName role;
+
 
     public int getId() {
         return id;
@@ -25,11 +25,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole() {
+    public RoleName getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleName role) {
         this.role = role;
     }
 }

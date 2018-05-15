@@ -2,6 +2,8 @@ package com.helpmycity.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Reclamation {
@@ -11,16 +13,25 @@ public class Reclamation {
     private Long id;
 
     private String category;
+
     private String description;
+
     private String photo;
+
     private float latitude;
+
     private float longitude;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date created_date;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date modification_date;
+
     private boolean isEnabled;
+
     private boolean isDeleted;
+
 
     @PrePersist
     private void initCreatedDate(){

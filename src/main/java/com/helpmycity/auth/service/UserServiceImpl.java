@@ -1,9 +1,10 @@
 package com.helpmycity.auth.service;
 
-import com.helpmycity.auth.model.Role;
-import com.helpmycity.auth.model.User;
-import com.helpmycity.auth.repository.RoleRepository;
-import com.helpmycity.auth.repository.UserRepository;
+import com.helpmycity.model.Role;
+import com.helpmycity.model.RoleName;
+import com.helpmycity.model.User;
+import com.helpmycity.repository.RoleRepository;
+import com.helpmycity.repository.UserRepository;
 import com.helpmycity.util.Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         user.setPassword(Crypt.getSecurePassword(user.getPassword()));
         user.setActive(1);
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByRole(RoleName.ROLE_USER).orElseThrow(() -> new RuntimeException("User Role not set."));
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }

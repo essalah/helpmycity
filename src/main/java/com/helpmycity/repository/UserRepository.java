@@ -1,6 +1,6 @@
-package com.helpmycity.auth.repository;
+package com.helpmycity.repository;
 
-import com.helpmycity.auth.model.User;
+import com.helpmycity.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

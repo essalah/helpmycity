@@ -2,7 +2,7 @@ package com.helpmycity.controller;
 
 import com.helpmycity.Status;
 import com.helpmycity.StatusCode;
-import com.helpmycity.auth.model.User;
+import com.helpmycity.model.User;
 import com.helpmycity.auth.service.UserService;
 import com.helpmycity.util.Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,6 @@ public class LoginController {
 
         else
             return new Status(StatusCode.FAILED, "Password incorrect");
-    }
-
-
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView registration() {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
-        return modelAndView;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
