@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface ReclamationRepository extends JpaRepository<Reclamation, Long> {
     long countByCreatedBy(long id);
     Page<Reclamation> findByCreatedBy(Long userId, Pageable pageable);
-    Optional<Reclamation> findById(Long id);
+    Page<Reclamation> findByIsEnabledTrue(Pageable pageable);
+    Optional<Reclamation> findByIdAndIsEnabledTrue(Long id);
 }

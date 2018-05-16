@@ -67,13 +67,13 @@ public class ReclamationController {
     public @ResponseBody
     Page<Reclamation> getAllReclamation(Pageable pageable) {
         // This returns a JSON or XML with the users
-        return reclamationRepository.findAll(pageable);
+        return reclamationRepository.findByIsEnabledTrue(pageable);
     }
 
     @GetMapping("/{id}/**")
     public @ResponseBody
     Reclamation getReclamation(@PathVariable("id") Long id) {
         // This returns a JSON or XML with the users
-        return reclamationRepository.findById(id).orElseThrow(()->new AppException("Reclamation not found"));
+        return reclamationRepository.findByIdAndIsEnabledTrue(id).orElseThrow(() -> new AppException("No Reclamation found with id = " + id));
     }
 }
