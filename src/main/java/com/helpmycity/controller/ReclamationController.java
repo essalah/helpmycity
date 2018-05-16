@@ -1,8 +1,8 @@
 package com.helpmycity.controller;
 
-import com.helpmycity.Status;
-import com.helpmycity.StatusCode;
+import com.helpmycity.exception.AppException;
 import com.helpmycity.model.Reclamation;
+import com.helpmycity.payload.ApiResponse;
 import com.helpmycity.repository.ReclamationRepository;
 import com.helpmycity.util.FileTools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.UUID;
 import static com.helpmycity.Config.UPLOADED_FOLDER;
 
 @RestController
-@RequestMapping(path = "/rec")
+@RequestMapping(path = "api/reclamations")
 public class ReclamationController {
 
     @Autowired // This means to get the bean called userRepository
@@ -58,9 +58,9 @@ public class ReclamationController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return new Status(StatusCode.FAILED, e.getMessage());
+            return new ApiResponse(false, e.getMessage());
         }
-        return new Status(StatusCode.SUCCESS, "SUCCESS");
+        return new ApiResponse(true, "Reclamation SUCCESSFULLY ADDED");
     }
 
     @GetMapping(path = "/all")
@@ -74,6 +74,6 @@ public class ReclamationController {
     public @ResponseBody
     Reclamation getReclamation(@PathVariable("id") Long id) {
         // This returns a JSON or XML with the users
-        return reclamationRepository.findOne(id);
+        return reclamationRepository.findById(id).orElseThrow(()->new AppException("Reclamation not found"));
     }
 }
