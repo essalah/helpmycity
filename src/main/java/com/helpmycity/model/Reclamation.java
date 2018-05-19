@@ -1,12 +1,14 @@
 package com.helpmycity.model;
 
+import com.helpmycity.model.audit.UserDateAudit;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Reclamation {
+public class Reclamation extends UserDateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +17,10 @@ public class Reclamation {
     private String category;
 
     private String description;
+
+    private String address;
+
+    private String dangerdegree;
 
     private String photo;
 
@@ -31,6 +37,10 @@ public class Reclamation {
     private boolean isEnabled;
 
     private boolean isDeleted;
+
+    /*@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name="user_id")
+    private User user;*/
 
 
     @PrePersist
@@ -121,4 +131,28 @@ public class Reclamation {
     public void setDeleted(boolean deleted) {
         this.isDeleted = deleted;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDangerdegree() {
+        return dangerdegree;
+    }
+
+    public void setDangerdegree(String dangerdegree) {
+        this.dangerdegree = dangerdegree;
+    }
+
+    /*public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }*/
 }
