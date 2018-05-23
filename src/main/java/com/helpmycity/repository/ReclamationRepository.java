@@ -14,4 +14,5 @@ public interface ReclamationRepository extends JpaRepository<Reclamation, Long> 
     Page<Reclamation> findByCreatedBy(Long userId, Pageable pageable);
     Page<Reclamation> findByIsEnabledTrue(Pageable pageable);
     Optional<Reclamation> findByIdAndIsEnabledTrue(Long id);
+
 }

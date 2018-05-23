@@ -28,9 +28,9 @@ public class ReclamationController {
     private ReclamationRepository reclamationRepository;
 
     @PostMapping(path = "/add") // Map ONLY POST Requests
-    public Object addNewUser(@RequestParam String category, @RequestParam String description,
-                             @RequestParam("photo") MultipartFile photo, @RequestParam float latitude,
-                             @RequestParam float longitude) {
+    public Object add(@RequestParam String category, @RequestParam String description,
+                      @RequestParam("photo") MultipartFile photo, @RequestParam float latitude,
+                      @RequestParam float longitude) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
@@ -62,6 +62,33 @@ public class ReclamationController {
         }
         return new ApiResponse(true, "Reclamation SUCCESSFULLY ADDED");
     }
+
+    @PutMapping(path = "/enable") // Map ONLY POST Requests
+    public Object updateState(@RequestParam Long id, @RequestParam Boolean isEnabled) {
+
+        try {
+
+            Reclamation tempReclamation = reclamationRepository.findById(id).orElseThrow(() -> new RuntimeException("No Reclamation found with id = " + id));
+            tempReclamation.setEnabled(isEnabled);
+
+            reclamationRepository.save(tempReclamation);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ApiResponse(false, e.getMessage());
+        }
+        return new ApiResponse(true, "Reclamation SUCCESSFULLY Enabled");
+    }
+
+    @DeleteMapping(path = "/delete")
+    public Object delete(@RequestParam Long id) {
+
+        reclamationRepository.deleteById(id);
+
+        return new ApiResponse(true, "Reclamation successfully deleted");
+    }
+
 
     @GetMapping(path = "/all")
     public @ResponseBody
