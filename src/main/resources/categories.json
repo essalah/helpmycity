@@ -1,0 +1,58 @@
+{
+  "category":[
+    {
+      "categoryID":14,
+      "categoryTitle":"Appropriation du trottoir",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/14.png",
+      "categoryDescription":"#winou_etrottoir \n#Sayeb_etrottoir"
+    },
+    {
+      "categoryID":1,
+      "categoryTitle":"Routes dégradées",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/1.png",
+      "categoryDescription":"Gros trous - route détériorée - bouche d'égout sans couvercle…"
+    },
+    {
+      "categoryID":2,
+      "categoryTitle":"Dos-d'âne",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/2.png",
+      "categoryDescription":"Hauteur excessive - absence de panneau de signalisation - peinture défaite…"
+    },
+    {
+      "categoryID":3,
+      "categoryTitle":"Dangers",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/3.png",
+      "categoryDescription":"Passage à niveau sans barrière - passerelle de piétons endommagée - feu rouge en panne..."
+    },
+    {
+      "categoryID":4,
+      "categoryTitle":"Pollution",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/4.png",
+      "categoryDescription":"Cumul de déchets des passants - ordures accumulées dans la rue - absence de conteneur poubelle…"
+    },
+    {
+      "categoryID":5,
+      "categoryTitle":"Moustiques",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/5.png",
+      "categoryDescription":"Eaux stagnantes - prolifération de moustiques…"
+    },
+    {
+      "categoryID":6,
+      "categoryTitle":"Incivisme \/ Dépassement",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/6.png",
+      "categoryDescription":"Jeter des décherts dans la rue - Stationner sur le trottoir - circuler en sens interdit - griller un feu rouge…"
+    },
+    {
+      "categoryID":10,
+      "categoryTitle":"Problèmes d'eau",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/10.png",
+      "categoryDescription":"Fuite d’eau – coupures d’eau fréquentes – eau sale au robinet... "
+    },
+    {
+      "categoryID":11,
+      "categoryTitle":"Problèmes d'électricité",
+      "categoryImage":"http:\/\/www.plan126.com\/ios_icons\/11.png",
+      "categoryDescription":"Pas de lumière publique le soir – coupures fréquentes d’électricité – câbles d’électricité non couverts ou défectueux…"
+    }
+  ]
+}

@@ -30,7 +30,7 @@ public class ReclamationController {
     @PostMapping(path = "/add") // Map ONLY POST Requests
     public Object add(@RequestParam String category, @RequestParam String description,
                       @RequestParam("photo") MultipartFile photo, @RequestParam float latitude,
-                      @RequestParam float longitude) {
+                      @RequestParam float longitude, @RequestParam String danger_degree)  {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
