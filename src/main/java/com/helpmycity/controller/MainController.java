@@ -32,36 +32,4 @@ public class MainController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
-
-
-    @GetMapping("/api/categories")
-    public Object getCategories() {
-
-        return categoryRepository.findAll();
-
-        /*Path path = null;
-        try {
-            path = Paths.get(getClass().getClassLoader()
-                    .getResource("categories.json").toURI());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        StringBuilder data = new StringBuilder();
-        Stream<String> lines = null;
-        try {
-            if (path != null) {
-                lines = Files.lines(path);
-                lines.forEach(line -> data.append(line).append("\n"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (lines != null)
-            lines.close();
-
-        return data.toString();*/
-
-    }
 }
