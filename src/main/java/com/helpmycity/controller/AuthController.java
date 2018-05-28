@@ -4,7 +4,6 @@ import com.helpmycity.model.Role;
 import com.helpmycity.model.RoleName;
 import com.helpmycity.model.User;
 import com.helpmycity.payload.ApiResponse;
-import com.helpmycity.payload.JwtAuthenticationResponse;
 import com.helpmycity.payload.UserProfile;
 import com.helpmycity.repository.RoleRepository;
 import com.helpmycity.repository.UserRepository;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.time.Instant;
 import java.util.Collections;
 
 
@@ -79,7 +77,7 @@ public class AuthController {
                                 @RequestParam String lastName) {
         if (userRepository.existsByEmail(email)) {
             return new ResponseEntity(
-                    new ApiResponse(false, "Emaiddress already in use!"),
+                    new ApiResponse(false, "Email address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
@@ -107,6 +105,36 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true,
                 "User registered successfully"));
+
+    }
+
+    @PostMapping("/update_role")
+    public Object setRole(@RequestParam Long user_id, @RequestParam String role) {
+        if (userRepository.existsById(user_id)) {
+            User user = userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("User not found"));
+
+
+            Role userRole = roleRepository.findByRole(RoleName.getRole(role))
+                    .orElseThrow(() -> new RuntimeException("User Role not set."));
+
+            user.setRoles(Collections.singleton(userRole));
+
+            User result = userRepository.save(user);
+
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentContextPath().path("/users/{email}")
+                    .buildAndExpand(result.getEmail()).toUri();
+
+            return ResponseEntity.created(location).body(new ApiResponse(true,
+                    "User update his role successfully"));
+
+        } else {
+
+            return new ResponseEntity(
+                    new ApiResponse(false, "internal error!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
 
     }
 
