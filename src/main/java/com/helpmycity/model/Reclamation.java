@@ -14,8 +14,6 @@ public class Reclamation extends UserDateAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String category;
-
     private String description;
 
     private String address;
@@ -38,9 +36,9 @@ public class Reclamation extends UserDateAudit {
 
     private boolean isDeleted;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name="user_id")
-    private User user;*/
+    @ManyToOne
+    @JoinColumn(name = "category_categoryID")
+    private Category category;
 
 
     @PrePersist
@@ -60,11 +58,11 @@ public class Reclamation extends UserDateAudit {
         this.id = id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

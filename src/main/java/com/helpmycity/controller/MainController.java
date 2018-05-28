@@ -1,7 +1,7 @@
 package com.helpmycity.controller;
 
-import com.google.gson.Gson;
 import com.helpmycity.Storage.StorageService;
+import com.helpmycity.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -11,17 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
-
 @RestController
 public class MainController {
 
     private final StorageService storageService;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Autowired
     public MainController(StorageService storageService) {
@@ -40,9 +35,11 @@ public class MainController {
 
 
     @GetMapping("/api/categories")
-    public String getCategories() {
+    public Object getCategories() {
 
-        Path path = null;
+        return categoryRepository.findAll();
+
+        /*Path path = null;
         try {
             path = Paths.get(getClass().getClassLoader()
                     .getResource("categories.json").toURI());
@@ -64,7 +61,7 @@ public class MainController {
         if (lines != null)
             lines.close();
 
-        return data.toString();
+        return data.toString();*/
 
     }
 }
