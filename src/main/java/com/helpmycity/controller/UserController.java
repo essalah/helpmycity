@@ -57,10 +57,9 @@ public class UserController {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
 
-        long reclamationsCount = reclamationRepository.countByCreatedBy(user.getId());
+        //long reclamationsCount = reclamationRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getCreatedAt(),
-                reclamationsCount);
+        UserProfile userProfile = new UserProfile(user.getId(), user.getEmail(), user.getUsername(), user.getName(), user.getLastName(), null);
 
         return userProfile;
     }

@@ -5,6 +5,7 @@ import com.helpmycity.model.RoleName;
 import com.helpmycity.model.User;
 import com.helpmycity.payload.ApiResponse;
 import com.helpmycity.payload.JwtAuthenticationResponse;
+import com.helpmycity.payload.UserProfile;
 import com.helpmycity.repository.RoleRepository;
 import com.helpmycity.repository.UserRepository;
 import com.helpmycity.security.JwtTokenProvider;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.time.Instant;
 import java.util.Collections;
 
 
@@ -47,6 +49,7 @@ public class AuthController {
 
     @PostMapping("/signin")
     public Object login(@RequestParam String email, @RequestParam String password) {
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         email, password
@@ -55,7 +58,11 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+
+        if (jwt != null) {
+            User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("verify your email or password"));
+            return ResponseEntity.ok(new UserProfile(user.getId(), user.getEmail(), user.getUsername(), user.getName(), user.getLastName(), jwt));
+        } else return new ApiResponse(false, "verify your email or password");
 
         /*User user = userService.findUserByEmail(email);
         if (user == null)
@@ -70,12 +77,11 @@ public class AuthController {
     @PostMapping("/signup")
     public Object createNewUser(@RequestParam String email, @RequestParam String username, @RequestParam String password, @RequestParam String name,
                                 @RequestParam String lastName) {
-        if(userRepository.existsByEmail(email)){
+        if (userRepository.existsByEmail(email)) {
             return new ResponseEntity(
                     new ApiResponse(false, "Emaiddress already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
-
 
 
         // Creating user's account
@@ -86,7 +92,6 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(password));
         user.setName(name);
         user.setLastName(lastName);
-
 
 
         Role userRole = roleRepository.findByRole(RoleName.ROLE_USER)
