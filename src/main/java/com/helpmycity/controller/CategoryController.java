@@ -17,7 +17,7 @@ import java.util.UUID;
 import static com.helpmycity.Config.UPLOADED_FOLDER;
 
 @RestController
-@RequestMapping(path = "api/category")
+@RequestMapping(path = "/api/category")
 public class CategoryController {
 
     @Autowired

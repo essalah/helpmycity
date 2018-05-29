@@ -1,0 +1,845 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8080
+basePath: "/"
+tags:
+- name: auth-controller
+  description: Auth Controller
+- name: category-controller
+  description: Category Controller
+- name: main-controller
+  description: Main Controller
+- name: reclamation-controller
+  description: Reclamation Controller
+- name: user-controller
+  description: User Controller
+paths:
+  "/api/auth/signin":
+    post:
+      tags:
+      - auth-controller
+      summary: login
+      operationId: loginUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: email
+        in: query
+        description: email
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: password
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/auth/signup":
+    post:
+      tags:
+      - auth-controller
+      summary: createNewUser
+      operationId: createNewUserUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: email
+        in: query
+        description: email
+        required: true
+        type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: password
+        required: true
+        type: string
+      - name: name
+        in: query
+        description: name
+        required: true
+        type: string
+      - name: lastName
+        in: query
+        description: lastName
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/auth/update_role":
+    post:
+      tags:
+      - auth-controller
+      summary: setRole
+      operationId: setRoleUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: user_id
+        in: query
+        description: user_id
+        required: true
+        type: integer
+        format: int64
+      - name: role
+        in: query
+        description: role
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/category/add":
+    post:
+      tags:
+      - category-controller
+      summary: addCategories
+      operationId: addCategoriesUsingPOST
+      consumes:
+      - multipart/form-data
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: true
+        type: integer
+        format: int64
+      - name: title
+        in: query
+        description: title
+        required: true
+        type: string
+      - name: description
+        in: query
+        description: description
+        required: true
+        type: string
+      - name: photo
+        in: formData
+        description: photo
+        required: true
+        type: file
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/category/categories":
+    get:
+      tags:
+      - category-controller
+      summary: getCategories
+      operationId: getCategoriesUsingGET
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/category/delete":
+    post:
+      tags:
+      - category-controller
+      summary: delete
+      operationId: deleteUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/reclamations/add":
+    post:
+      tags:
+      - reclamation-controller
+      summary: add
+      operationId: addUsingPOST
+      consumes:
+      - multipart/form-data
+      produces:
+      - "*/*"
+      parameters:
+      - name: category
+        in: query
+        description: category
+        required: true
+        type: integer
+        format: int64
+      - name: description
+        in: query
+        description: description
+        required: true
+        type: string
+      - name: photo
+        in: formData
+        description: photo
+        required: true
+        type: file
+      - name: latitude
+        in: query
+        description: latitude
+        required: true
+        type: number
+        format: float
+      - name: longitude
+        in: query
+        description: longitude
+        required: true
+        type: number
+        format: float
+      - name: danger_degree
+        in: query
+        description: danger_degree
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/reclamations/all":
+    get:
+      tags:
+      - reclamation-controller
+      summary: getAllReclamation
+      operationId: getAllReclamationUsingGET
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Page«Reclamation»"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/reclamations/delete":
+    delete:
+      tags:
+      - reclamation-controller
+      summary: delete
+      operationId: deleteUsingDELETE
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/reclamations/enable":
+    put:
+      tags:
+      - reclamation-controller
+      summary: updateState
+      operationId: updateStateUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: query
+        description: id
+        required: true
+        type: integer
+        format: int64
+      - name: isEnabled
+        in: query
+        description: isEnabled
+        required: true
+        type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/reclamations/{id}/**":
+    get:
+      tags:
+      - reclamation-controller
+      summary: getReclamation
+      operationId: getReclamationUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Reclamation"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/checkEmailAvailability":
+    get:
+      tags:
+      - user-controller
+      summary: checkEmailAvailability
+      operationId: checkEmailAvailabilityUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: email
+        in: query
+        description: email
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserIdentityAvailability"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/checkUsernameAvailability":
+    get:
+      tags:
+      - user-controller
+      summary: checkUsernameAvailability
+      operationId: checkUsernameAvailabilityUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: username
+        in: query
+        description: username
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserIdentityAvailability"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/me":
+    get:
+      tags:
+      - user-controller
+      summary: getCurrentUser
+      operationId: getCurrentUserUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: query
+        required: false
+        type: integer
+        format: int64
+      - name: name
+        in: query
+        required: false
+        type: string
+      - name: username
+        in: query
+        required: false
+        type: string
+      - name: email
+        in: query
+        required: false
+        type: string
+      - name: password
+        in: query
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserSummary"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/{username}":
+    get:
+      tags:
+      - user-controller
+      summary: getUserProfile
+      operationId: getUserProfileUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: username
+        in: path
+        description: username
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserProfile"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/{username}/reclamations":
+    get:
+      tags:
+      - user-controller
+      summary: getReclamationsCreatedBy
+      operationId: getReclamationsCreatedByUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: username
+        in: path
+        description: username
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Page«Reclamation»"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/img/{filename}":
+    get:
+      tags:
+      - main-controller
+      summary: serveFile
+      operationId: serveFileUsingGET
+      produces:
+      - "*/*"
+      parameters:
+      - name: filename
+        in: path
+        description: filename
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Resource"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+definitions:
+  Category:
+    type: object
+    properties:
+      categoryDescription:
+        type: string
+      categoryID:
+        type: integer
+        format: int64
+      categoryImage:
+        type: string
+      categoryTitle:
+        type: string
+    title: Category
+  File:
+    type: object
+    properties:
+      absolute:
+        type: boolean
+      absoluteFile:
+        "$ref": "#/definitions/File"
+      absolutePath:
+        type: string
+      canonicalFile:
+        "$ref": "#/definitions/File"
+      canonicalPath:
+        type: string
+      directory:
+        type: boolean
+      file:
+        type: boolean
+      freeSpace:
+        type: integer
+        format: int64
+      hidden:
+        type: boolean
+      name:
+        type: string
+      parent:
+        type: string
+      parentFile:
+        "$ref": "#/definitions/File"
+      path:
+        type: string
+      totalSpace:
+        type: integer
+        format: int64
+      usableSpace:
+        type: integer
+        format: int64
+    title: File
+  InputStream:
+    type: object
+    title: InputStream
+  Pageable:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int64
+      pageNumber:
+        type: integer
+        format: int32
+      pageSize:
+        type: integer
+        format: int32
+      paged:
+        type: boolean
+      sort:
+        "$ref": "#/definitions/Sort"
+      unpaged:
+        type: boolean
+    title: Pageable
+  Page«Reclamation»:
+    type: object
+    properties:
+      content:
+        type: array
+        items:
+          "$ref": "#/definitions/Reclamation"
+      first:
+        type: boolean
+      last:
+        type: boolean
+      number:
+        type: integer
+        format: int32
+      numberOfElements:
+        type: integer
+        format: int32
+      pageable:
+        "$ref": "#/definitions/Pageable"
+      size:
+        type: integer
+        format: int32
+      sort:
+        "$ref": "#/definitions/Sort"
+      totalElements:
+        type: integer
+        format: int64
+      totalPages:
+        type: integer
+        format: int32
+    title: Page«Reclamation»
+  Reclamation:
+    type: object
+    properties:
+      address:
+        type: string
+      category:
+        "$ref": "#/definitions/Category"
+      createdAt:
+        type: string
+        format: date-time
+      createdBy:
+        type: integer
+        format: int64
+      created_date:
+        type: string
+        format: date-time
+      dangerdegree:
+        type: string
+      deleted:
+        type: boolean
+      description:
+        type: string
+      enabled:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      latitude:
+        type: number
+        format: float
+      longitude:
+        type: number
+        format: float
+      modification_date:
+        type: string
+        format: date-time
+      photo:
+        type: string
+      updatedAt:
+        type: string
+        format: date-time
+      updatedBy:
+        type: integer
+        format: int64
+    title: Reclamation
+  Resource:
+    type: object
+    properties:
+      description:
+        type: string
+      file:
+        "$ref": "#/definitions/File"
+      filename:
+        type: string
+      inputStream:
+        "$ref": "#/definitions/InputStream"
+      open:
+        type: boolean
+      readable:
+        type: boolean
+      uri:
+        "$ref": "#/definitions/URI"
+      url:
+        "$ref": "#/definitions/URL"
+    title: Resource
+  Sort:
+    type: object
+    properties:
+      sorted:
+        type: boolean
+      unsorted:
+        type: boolean
+    title: Sort
+  URI:
+    type: object
+    properties:
+      absolute:
+        type: boolean
+      authority:
+        type: string
+      fragment:
+        type: string
+      host:
+        type: string
+      opaque:
+        type: boolean
+      path:
+        type: string
+      port:
+        type: integer
+        format: int32
+      query:
+        type: string
+      rawAuthority:
+        type: string
+      rawFragment:
+        type: string
+      rawPath:
+        type: string
+      rawQuery:
+        type: string
+      rawSchemeSpecificPart:
+        type: string
+      rawUserInfo:
+        type: string
+      scheme:
+        type: string
+      schemeSpecificPart:
+        type: string
+      userInfo:
+        type: string
+    title: URI
+  URL:
+    type: object
+    properties:
+      authority:
+        type: string
+      content:
+        type: object
+      defaultPort:
+        type: integer
+        format: int32
+      file:
+        type: string
+      host:
+        type: string
+      path:
+        type: string
+      port:
+        type: integer
+        format: int32
+      protocol:
+        type: string
+      query:
+        type: string
+      ref:
+        type: string
+      userInfo:
+        type: string
+    title: URL
+  UserIdentityAvailability:
+    type: object
+    properties:
+      available:
+        type: boolean
+    title: UserIdentityAvailability
+  UserProfile:
+    type: object
+    properties:
+      accessToken:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      lastNname:
+        type: string
+      name:
+        type: string
+      tokenType:
+        type: string
+      username:
+        type: string
+    title: UserProfile
+  UserSummary:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      username:
+        type: string
+    title: UserSummary
