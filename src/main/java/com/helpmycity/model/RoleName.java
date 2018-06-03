@@ -1,24 +1,18 @@
 package com.helpmycity.model;
 
 public enum RoleName {
-    ROLE_USER("USER"),
-    ROLE_AGENT("AGENT"),
-    ROLE_ADMIN("ADMIN");
-
-    private String value;
-
-    RoleName(String n) {
-        this.value = n;
-    }
+    ROLE_USER,
+    ROLE_AGENT,
+    ROLE_ADMIN;
 
     public static RoleName getRole(String in) {
 
         switch (in) {
-            case "USER":
+            case "ROLE_USER":
                 return ROLE_USER;
-            case "AGENT":
+            case "ROLE_AGENT":
                 return ROLE_AGENT;
-            case "ADMIN":
+            case "ROLE_ADMIN":
                 return ROLE_ADMIN;
 
             default:
