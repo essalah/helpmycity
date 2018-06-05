@@ -2,7 +2,6 @@ package com.helpmycity;
 
 import com.helpmycity.Storage.StorageProperties;
 import com.helpmycity.Storage.StorageService;
-import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
