@@ -10,6 +10,7 @@ import com.helpmycity.util.FileTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -96,16 +97,18 @@ public class ReclamationController {
 
     @GetMapping(path = "/all")
     public @ResponseBody
-    Page<Reclamation> getAllReclamation(Pageable pageable) {
-        // This returns a JSON or XML with the users
+    Page<Reclamation> getAllReclamation() {
+        Pageable pageable = Pageable.unpaged();
         return reclamationRepository.findByIsEnabledTrue(pageable);
     }
 
     @GetMapping(path = "/list")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody
-    Page<Reclamation> getAll(Pageable pageable) {
+    Page<Reclamation> getAll() {
         // This returns a JSON or XML with the users
-        return reclamationRepository.findAll(pageable);
+        Pageable pageable1 = Pageable.unpaged();
+        return reclamationRepository.findAll(pageable1);
     }
 
     @GetMapping("/{id}/**")

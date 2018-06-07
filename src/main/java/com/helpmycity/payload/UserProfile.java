@@ -4,16 +4,16 @@ public class UserProfile {
     private Long id;
     private String username;
     private String name;
-    private  String lastNname;
+    private  String lastName;
     private String email;
     private String accessToken;
     private String tokenType = "Bearer";
 
-    public UserProfile(Long id, String email, String username, String name, String lastNname, String accessToken) {
+    public UserProfile(Long id, String email, String username, String name, String lastName, String accessToken) {
 
         this.id = id;
         this.email = email;
-        this.lastNname = lastNname;
+        this.lastName = lastName;
         this.username = username;
         this.name = name;
         this.accessToken = accessToken;
@@ -43,12 +43,12 @@ public class UserProfile {
         this.name = name;
     }
 
-    public String getLastNname() {
-        return lastNname;
+    public String getlastName() {
+        return lastName;
     }
 
-    public void setLastNname(String lastNname) {
-        this.lastNname = lastNname;
+    public void setlastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
