@@ -102,6 +102,13 @@ public class ReclamationController {
         return reclamationRepository.findByIsEnabledTrue(pageable);
     }
 
+    @GetMapping(path = "/list")
+    public @ResponseBody
+    Page<Reclamation> getAll(Pageable pageable) {
+        // This returns a JSON or XML with the users
+        return reclamationRepository.findAll(pageable);
+    }
+
     @GetMapping("/{id}/**")
     public @ResponseBody
     Reclamation getReclamation(@PathVariable("id") Long id) {
