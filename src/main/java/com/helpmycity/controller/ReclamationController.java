@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
 import static com.helpmycity.Config.UPLOADED_FOLDER;
 
@@ -40,8 +39,8 @@ public class ReclamationController {
 
         try {
 
-            UUID uuid = UUID.randomUUID();
-            String photoName = uuid.toString() + "." + FileTools.getFileExtension(photo.getOriginalFilename());
+            long timestamp = System.currentTimeMillis();
+            String photoName = timestamp + "." + FileTools.getFileExtension(photo.getOriginalFilename());
 
             // Get the file and save it somewhere
             byte[] bytes = photo.getBytes();

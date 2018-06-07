@@ -19,6 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -31,6 +33,12 @@ public class UserController {
     private ReclamationRepository reclamationRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @GetMapping("/list")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public List<User> getAllUser(@CurrentUser UserPrincipal currentUser) {
+        return userRepository.findAll();
+    }
 
     @GetMapping("/me")
     @PreAuthorize("hasRole('ROLE_USER')")
