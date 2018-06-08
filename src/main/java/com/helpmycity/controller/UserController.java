@@ -67,7 +67,7 @@ public class UserController {
 
         //long reclamationsCount = reclamationRepository.countByCreatedBy(user.getId());
 
-        UserProfile userProfile = new UserProfile(user.getId(), user.getEmail(), user.getUsername(), user.getName(), user.getLastName(), null);
+        UserProfile userProfile = new UserProfile(user.getId(), user.getEmail(), user.getUsername(), user.getName(), user.getLastName(), null, user.getRoles());
 
         return userProfile;
     }
