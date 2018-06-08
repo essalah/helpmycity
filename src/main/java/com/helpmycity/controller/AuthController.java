@@ -59,7 +59,7 @@ public class AuthController {
 
         if (jwt != null) {
             User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("verify your email or password"));
-            return ResponseEntity.ok(new UserProfile(user.getId(), user.getEmail(), user.getUsername(), user.getName(), user.getLastName(), jwt));
+            return ResponseEntity.ok(new UserProfile(user.getId(), user.getEmail(), user.getUsername(), user.getName(), user.getLastName(), jwt, user.getRoles()));
         } else return new ApiResponse(false, "verify your email or password");
 
         /*User user = userService.findUserByEmail(email);

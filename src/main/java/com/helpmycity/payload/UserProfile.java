@@ -1,13 +1,19 @@
 package com.helpmycity.payload;
 
+import com.helpmycity.model.Role;
+
+import java.util.HashSet;
+import java.util.Set;
+
 public class UserProfile {
     private Long id;
     private String username;
     private String name;
-    private  String lastName;
+    private String lastName;
     private String email;
     private String accessToken;
     private String tokenType = "Bearer";
+    private Set<Role> roles = new HashSet<>();
 
     public UserProfile(Long id, String email, String username, String name, String lastName, String accessToken) {
 
@@ -17,6 +23,17 @@ public class UserProfile {
         this.username = username;
         this.name = name;
         this.accessToken = accessToken;
+    }
+
+    public UserProfile(Long id, String email, String username, String name, String lastName, String accessToken, Set<Role> roles) {
+
+        this.id = id;
+        this.email = email;
+        this.lastName = lastName;
+        this.username = username;
+        this.name = name;
+        this.accessToken = accessToken;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -43,11 +60,11 @@ public class UserProfile {
         this.name = name;
     }
 
-    public String getlastName() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setlastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -73,5 +90,13 @@ public class UserProfile {
 
     public void setTokenType(String tokenType) {
         this.tokenType = tokenType;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
