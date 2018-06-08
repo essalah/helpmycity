@@ -1,5 +1,6 @@
 package com.helpmycity.controller;
 
+import com.google.gson.Gson;
 import com.helpmycity.exception.ResourceNotFoundException;
 import com.helpmycity.model.Reclamation;
 import com.helpmycity.model.Role;
@@ -85,7 +86,9 @@ public class UserController {
     }
 
     @PostMapping("/update_user")
-    public Object setRole(@RequestBody UserProfile profile) {
+    public Object setRole(@RequestBody String userProfile) {
+        Gson gson = new Gson();
+        UserProfile profile = gson.fromJson(userProfile, UserProfile.class);
         if (userRepository.existsById(profile.getId())) {
             User user = userRepository.findById(profile.getId()).orElseThrow(() -> new RuntimeException("User not found"));
 
