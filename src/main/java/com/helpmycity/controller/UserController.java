@@ -85,7 +85,7 @@ public class UserController {
     }
 
     @PostMapping("/update_user")
-    public Object setRole(@RequestParam UserProfile profile) {
+    public Object setRole(@RequestBody UserProfile profile) {
         if (userRepository.existsById(profile.getId())) {
             User user = userRepository.findById(profile.getId()).orElseThrow(() -> new RuntimeException("User not found"));
 
