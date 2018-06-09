@@ -103,7 +103,7 @@ public class ReclamationController {
     }
 
     @GetMapping(path = "/list")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_AGENT')")
     public @ResponseBody
     Page<Reclamation> getAll() {
         // This returns a JSON or XML with the users
