@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -96,8 +97,21 @@ public class UserController {
             Role userRole = roleRepository.findByRole(RoleName.getRole(profile.getRoles().iterator().next().getRole().name()))
                     .orElseThrow(() -> new RuntimeException("User Role not set."));
 
-            user.setRoles(Collections.singleton(userRole));
+            PasswordEncoder passwordEncoder = new PasswordEncoder() {
+                @Override
+                public String encode(CharSequence charSequence) {
+                    return null;
+                }
 
+                @Override
+                public boolean matches(CharSequence charSequence, String s) {
+                    return false;
+                }
+            };
+            user.setRoles(Collections.singleton(userRole));
+            user.setName(profile.getName());
+            user.setLastName(profile.getLastName());
+            //user.setPassword(passwordEncoder.encode(profile.));
             User result = userRepository.save(user);
 
             URI location = ServletUriComponentsBuilder
